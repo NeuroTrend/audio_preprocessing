@@ -2,13 +2,15 @@ import logging.config
 import yaml
 import os
 
-# Load the config file
-with open('logging_config.yaml', 'rt') as f:
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+config_path = os.path.join(current_dir, 'logging_config.yaml')
+print(config_path)
+with open(config_path, 'rt') as f:
     config = yaml.safe_load(f.read())
 
-# Configure the logging module with the config file
 logging.config.dictConfig(config)
 
 env = os.getenv('ENV', 'development')
 
-logger = logging.getLogger('development')
+logger = logging.getLogger(env)
