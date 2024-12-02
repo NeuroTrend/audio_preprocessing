@@ -46,6 +46,7 @@ audio_preprocessing/
 ├── scripts/
 │   └── process_audio.py
 ├── configs/
+│   ├── __init__.py
 │   ├── config.yaml
 │   ├── logger.py
 │   └── logging.yaml
