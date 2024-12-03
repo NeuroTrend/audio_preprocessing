@@ -76,7 +76,9 @@ The project will be developed in two main phases:
 
 ### Architecture
 
-The application will follow the Hexagonal Architecture (also known as Ports and Adapters) to ensure a clean separation of concerns between the core business logic and external systems.
+We plan to employ the hexagonal architecture (also known as the ports and adapters pattern) to create a flexible and maintainable codebase. We want to maintain strong separations of concerns, decoupling the core logic from external dependencies. Our goal is to facilitate an easy transition from the MVP to a scalable, cloud native version 1.
+
+The application is designed to handle a moderate number of lossless audio files efficiently. To achieve this, each task operates independently, with queues managing the flow between stages.
 
 #### Domain Logic (Core):
 Audio Processor Service: Handles the segmentation of audio files and updates metadata.
@@ -100,6 +102,12 @@ Firestore Adapter: Implements database operations using Google Cloud Firestore.
 
 Google Drive Adapter: Implements cloud storage operations using the Google Drive API.
 
+#### Processing Pipeline
+1. Download/Load File into Memory: Retrieve audio files and load them into memory for processing.
+2. Chop the Audio File into Chunks: Split the loaded audio files into smaller chunks for training.
+3. Build & Add Metadata to AIFF and Firestore Database: Embed training metadata into each AIFF chunk and update the Firestore database with relevant information.
+4. Upload the Audio Files into Google Drive: Upload processed audio chunks to Google Drive for storage and easy access with Google Colab.
+
 ## Technologies Used
 
 **Programming Language:** Python 3.10.15
@@ -110,6 +118,8 @@ Google Drive Adapter: Implements cloud storage operations using the Google Drive
 
 **Docker:** Containerization of the application
 
+**Workflow Management:** Workflow execution framework TBD.
+
 ## Implementation Steps
 
 ### Phase 1: MVP Development
@@ -118,26 +128,16 @@ Google Drive Adapter: Implements cloud storage operations using the Google Drive
     - ~~Initialize a Git repository and set up the directory structure following hexagonal architecture principles.~~
     - ~~Create a virtual environment and manage dependencies using requirements.txt.~~
     - ~~Create a Dockerfile for containerization.~~
-2.	Define Ports (Interfaces):
-    - Create abstract base classes for each port in the ports/ directory.
-3.	Develop Core Services:
-    - Implement the AudioProcessor and DatabaseService in the core/ directory.
+2.	Define Ports (Interfaces): Create abstract base classes for each port in the ports/ directory.
+3.	Develop Core Services: Implement the AudioProcessor and DatabaseService in the core/ directory.
     - Ensure they interact only with the defined ports.
-4.	Implement Adapters:
-    - In the adapters/ directory, create concrete implementations for each port:
+4.	Implement Adapters: Implement each port in the adapters/ directory
     - FileSystemAudioRepository
     - AIFFMetadataRepository
     - FirestoreAdapter
     - GoogleDriveAdapter
-5.	Develop Command-Line Interface (CLI):
-    - Create a script in the scripts/ directory to serve as the entry point.
-    - Use argparse or click for handling command-line arguments.
-6.	Testing:
-    - Write unit tests in the tests/ directory.
-    - Use pytest and mocking for testing core logic and adapters.
-8.	Documentation:
-    - Document the code with docstrings and comments.
-    - Update the README.md with usage instructions.
+5.	Develop Command-Line Interface (CLI)
+6.	Testing
 
 # Contributing
 
