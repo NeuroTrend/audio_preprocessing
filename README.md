@@ -9,7 +9,7 @@ An application that automates segmentation of AIFF audio files, updates metadata
 
 - [Repository Structure](#repository-structure)
 - [Introduction](#introduction)
-- [Project Purpose](#project-purpose)
+- [Project Mission Statement](#project-mission-statement)
 - [Project Plan](#project-plan)
 - [Overview](#overview)
 - [Architecture](#architecture)
