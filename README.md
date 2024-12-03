@@ -58,7 +58,7 @@ audio_preprocessing/
 
 ## Introduction
 
-The goal of the project is to automate the segmentation and metadata embedding of AIFF audio files to prepare them for AI model training. By storing training information directly within the AIFF file’s metadata, it streamlines the generation of dataset CSV files required by platforms like Hugging Face.
+The goal of the project is to automate the segmentation and metadata embedding of AIFF audio files to prepare them for AI model training. Storing training data directly on in the AIFF file’s metadata streamlines migrations and the generation of dataset CSV files required by platforms like Hugging Face.
 
 ## Project Mission Statement
 
@@ -76,9 +76,9 @@ The project will be developed in two main phases:
 
 ### Architecture
 
-We plan to employ the hexagonal architecture (also known as the ports and adapters pattern) to create a flexible and maintainable codebase. We want to maintain strong separations of concerns, decoupling the core logic from external dependencies. Our goal is to facilitate an easy transition from the MVP to a scalable, cloud native version 1.
+We plan to employ the hexagonal architecture (also known as the ports and adapters pattern) to create a flexible and maintainable codebase. We want to maintain strong separations of concerns, decoupling the core logic from external dependencies. Our goal is to facilitate an easy transition from the MVP to a scalable, cloud native Version 1.
 
-The application is designed to handle a moderate number of lossless audio files efficiently. To achieve this, each task operates independently, with queues managing the flow between stages.
+The application is designed to handle a large number of lossless audio files efficiently. To achieve this, each task operates independently, with queues managing the flow between stages.
 
 #### Domain Logic (Core):
 Audio Processor Service: Handles the segmentation of audio files and updates metadata.
@@ -101,7 +101,6 @@ AIFF Metadata Adapter: Implements metadata operations using suitable libraries.
 Firestore Adapter: Implements database operations using Google Cloud Firestore.
 
 Google Drive Adapter: Implements cloud storage operations using the Google Drive API.
-
 #### Processing Pipeline
 1. Download/Load File into Memory: Retrieve audio files and load them into memory for processing.
 2. Chop the Audio File into Chunks: Split the loaded audio files into smaller chunks for training.
