@@ -72,7 +72,7 @@ The project will be developed in two main phases:
 
 **MVP (Minimum Viable Product):** A script that operates on a local machine to process audio files, built using hexagonal (ports and adapters) architecture for flexibility and maintainability.
 
-**Version 1 (V1):** Transition the script into a web service deployed on Google Cloud Platform (GCP), enabling scalability and accessibility.
+**V1 (Version 1):** Transition the script into a web service deployed on Google Cloud Platform (GCP), enabling scalability and accessibility.
 
 ### Architecture
 
