@@ -1,3 +1,8 @@
+---
+layout: default
+title: audio_preprocessing docs
+---
+
 # CLI Command Structure Guide
 
 ## Purpose of the CLI
