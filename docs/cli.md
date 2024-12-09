@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: audio_preprocessing docs
 ---
 
@@ -64,5 +64,3 @@ For example, `audio component create-hashmaps` will only run the "create-hashmap
 
 * Common errors and solutions  
 * Tips for debugging
-
-# 
