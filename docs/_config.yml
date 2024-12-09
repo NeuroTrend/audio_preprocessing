@@ -2,4 +2,3 @@ title: 'audio_preprocessing docs'
 description: 'An application that automates segmentation of AIFF audio files, updates metadata, catalogs them in a database, and uploads to Google Drive for AI model training preparation.'
 baseurl: /docs
 url: https://neurotrend.github.io/audio_preprocessing/
-theme: jekyll-theme-minimal
