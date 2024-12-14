@@ -1,7 +1,3 @@
----
-layout: page  
----
-
 # CLI Command Structure Guide
 
 ## Purpose of the CLI
