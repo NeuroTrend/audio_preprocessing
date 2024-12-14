@@ -1,6 +1,5 @@
 ---
-layout: post
-title: audio_preprocessing docs
+layout: page  
 ---
 
 # CLI Command Structure Guide
