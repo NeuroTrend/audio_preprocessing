@@ -24,34 +24,18 @@ This document describes a software application designed to prepare audio files f
 ```
 audio_preprocessing/
 ├── adapters/
-│   ├── __init__.py
-│   ├── audio_repository.py
-│   ├── metadata_repository.py
-│   ├── database_adapter.py
-│   └── cloud_storage_adapter.py
+│   └── frameworks/
+│   └── persistence/
 ├── core/
-│   ├── __init__.py
-│   ├── audio_processor.py
-│   └── database_service.py
+│   └── domain/
+│   └── application/
+│   └── repositories/
 ├── ports/
-│   ├── __init__.py
-│   ├── audio_repository_port.py
-│   ├── metadata_repository_port.py
-│   ├── database_port.py
-│   └── cloud_storage_port.py
+│   └── outputs/
+│   └── inputs/
 ├── tests/
-│   ├── __init__.py
-│   ├── test_audio_processor.py
-│   ├── test_database_service.py
-│   ├── test_adapters.py
-│   └── fixtures/
 ├── scripts/
-│   └── process_audio.py
 ├── configs/
-│   ├── __init__.py
-│   ├── config.yaml
-│   ├── logger.py
-│   └── logging.yaml
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
