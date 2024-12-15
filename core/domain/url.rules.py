@@ -6,57 +6,44 @@ class ValidationResult(TypedDict):
     downloadRequired: bool
 
 class IdentificationResult(TypedDict):
-    type: Literal["local", "http", "invalid"]
+    location: Literal["local", "http", "invalid"]
     url: str
 
-valid_extensions = ["AIFF"]
+VALID_EXTENSIONS = ["AIFF"]
+VALID_CONTENT_TYPES = ["audio/aiff"]
 
 
 
 class URLRules:
+    def __init__(self, url: str, exists: bool, isDir = False, isFile = False, extension = None, content_type = None):
+        self.url = url
+        self.exists = exists
+        self.isDir = isDir
+        self.isFile = isFile
+        self.extension = extension
+        self.content_type = content_type
 
-    def identify(self, url: str) -> str:
-        """
-        Identifies if a URL is local or an HTTP URL.
 
-        Args:
-          url: The URL to identify.
 
-        Returns:
-          "local" if the URL is a local file path, "http" if it's an HTTPs URL, 
-          or "invalid" if it's neither.
-        """
-
-        if url.startswith("/") or url.startswith("./"):
+    def identify(self) -> IdentificationResult:
+        if self.url.startswith("/") or self.url.startswith("./"):
             return {
                 "type": "local",
-                "url": url
+                "url": self.url
             }
-        elif url.startswith("http://"):
+        elif self.url.startswith("http://"):
             return {
                 "type": "http",
-                "url": url
+                "url": self.url
             }
         else:
             return {
                 "type": "invalid",
-                "url": url
+                "url": self.url
             }
 
-    def validateLocal(self, url: str, exists: bool, isDir: bool, isFile: bool) -> ValidationResult:
-        """
-        Validates a local URL.
-
-        Args:
-          url: The local URL to validate.
-          exists: Whether the file exists.
-          isDir: Whether the file is a directory.
-          isFile: Whether the file is a regular file.
-
-        Returns:
-          True if the URL is a valid local file path, False otherwise.
-        """
-        match (exists, isDir, isFile):
+    def validateLocal(self) -> ValidationResult:
+        match (self.exists, self.isDir, self.isFile):
             case (True, True, _):
                 return {
                     "valid": True,
@@ -64,8 +51,7 @@ class URLRules:
                     "downloadRequired": False
                 }
             case (True, _, True):
-                extension = url.split('.').pop()
-                if extension in valid_extensions:
+                if self.extension in VALID_EXTENSIONS:
                     return {
                         "valid": True,
                         "type": "file",
@@ -79,17 +65,8 @@ class URLRules:
                 }
         
 
-    def validateHTTPS(self, url: str, exists: bool, isDir: bool, isFile: bool) -> bool:
-        """
-        Validates an HTTPs URL.
-
-        Args:
-          url: The HTTPs URL to validate.
-
-        Returns:
-          True if the URL is a valid HTTPs URL, False otherwise.
-        """
-        match (exists, isDir, isFile):
+    def validateHTTPS(self) -> bool:
+        match (self.exists, self.isDir, self.isFile):
             case (True, True, _):
                 return {
                     "valid": True,
@@ -97,8 +74,7 @@ class URLRules:
                     "downloadRequired": True
                 }
             case (True, _, True):
-                extension = url.split('.').pop()
-                if extension in valid_extensions:
+                if self.content_type in VALID_CONTENT_TYPES:
                     return {
                         "valid": True,
                         "type": "file",
