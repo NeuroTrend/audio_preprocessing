@@ -1,18 +1,10 @@
 import os.path
 import requests
 
-class URLAdaptor:
+class LocalAdaptor:
     def __init__(self, url):
         self.url = url
         self.responseHead = None
-    
-    def identify_location(self) -> str:
-        if self.url.startswith("/") or self.url.startswith("./"):
-            return "local"
-        elif self.url.startswith("http://"):
-            return "http"
-        else:
-            return "invalid"
 
     def localExists(self):
         return os.path.exists(self.url)
@@ -22,6 +14,14 @@ class URLAdaptor:
     
     def localIsFile(self):
         return os.path.isfile(self.url)
+    
+    def getExtension(self):
+        return os.path.splitext(self.url)[1]
+
+class HTTPAdapter:
+    def __init__(self, url):
+        self.url = url
+        self.responseHead = None
     
     def httpExists(self):
         if self.responseHead is not None:
@@ -42,6 +42,3 @@ class URLAdaptor:
         if self.responseHead is not None:
             self.responseHead = requests.head(self.url)
         return self.responseHead.headers['Content-Type']
-    
-    def getExtension(self):
-        return os.path.splitext(self.url)[1]

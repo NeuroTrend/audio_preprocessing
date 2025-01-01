@@ -1,6 +1,7 @@
 from adaptors.frameworks.url import URLAdaptor
 from core.domain.url_rules import ResourceInfo, classify_resource
 from config.logger import logger
+from core.utils import identify_location
 
 def process_url(url: str) -> ResourceInfo:
     """
@@ -14,7 +15,7 @@ def process_url(url: str) -> ResourceInfo:
     """
     adaptor = URLAdaptor(url)
     logger.info(f"Identifying location of {url}")
-    location = adaptor.identify_location()
+    location = identify_location(url)
     logger.info(f"Location identified as {location}. Validating URL")
 
     exists, is_dir, is_file, extension, content_type = False, False, False, None, None
