@@ -1,4 +1,4 @@
-from adaptors.frameworks.url import URLAdaptor
+from adaptors.frameworks.url import LocalAdaptor, HTTPAdaptor
 from core.domain.url_rules import ResourceInfo, classify_resource
 from config.logger import logger
 from core.utils import identify_location
@@ -13,7 +13,6 @@ def process_url(url: str) -> ResourceInfo:
     Returns:
         A ResourceInfo object containing classification details.
     """
-    adaptor = URLAdaptor(url)
     logger.info(f"Identifying location of {url}")
     location = identify_location(url)
     logger.info(f"Location identified as {location}. Validating URL")
@@ -21,11 +20,13 @@ def process_url(url: str) -> ResourceInfo:
     exists, is_dir, is_file, extension, content_type = False, False, False, None, None
 
     if location == "local":
+        adaptor = LocalAdaptor(url)
         exists = adaptor.localExists()
         is_dir = adaptor.localIsDir()
         is_file = adaptor.localIsFile()
         extension = adaptor.getExtension()
     elif location == "http":
+        adaptor = HTTPAdaptor(url)
         exists = adaptor.httpExists()
         is_dir = adaptor.httpIsDir()
         is_file = adaptor.httpIsFile()
