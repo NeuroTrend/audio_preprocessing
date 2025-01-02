@@ -4,7 +4,7 @@
 
 Audio File Processing for AI Model Training
 
-This document describes a software application designed to prepare audio files for AI model training. The application automates the process of segmenting AIFF audio files, updating metadata, cataloging them in a database (Google Cloud Firestore), and uploading them to Google Drive. The project emphasizes a hexagonal architecture for flexibility and maintainability, with plans to evolve from a local script (MVP) to a scalable web service on Google Cloud Platform (V1). Key technologies used include Python, Google Cloud Firestore, Google Drive API, and Docker. The document also outlines the repository structure, project mission, implementation steps, and contribution guidelines. This repository contains a Python application designed to prepare AIFF audio files for AI training. The application automates the process of segmenting audio, updating metadata, and storing information in Google Cloud Firestore. Processed files are then uploaded to Google Drive for easy access. The project is built with scalability in mind, allowing for future development into a web service hosted on Google Cloud. Key technologies used include Python, Google Cloud Firestore, Google Drive API, and Docker. This README will guide you through the project's structure, objectives, development steps, and contribution guidelines.
+This document describes a software application designed to prepare audio files for AI model training. The application automates the process of segmenting AIFF audio files, updating metadata, cataloging them in a database and uploading them to Cloud Storage. The project emphasizes a hexagonal architecture for flexibility and maintainability, with plans to evolve from a local script (V0) to a scalable web service. The document also outlines the repository structure, project mission, implementation steps, and contribution guidelines.
 
 ## Table of Contents
 
@@ -24,34 +24,18 @@ This document describes a software application designed to prepare audio files f
 ```
 audio_preprocessing/
 ├── adapters/
-│   ├── __init__.py
-│   ├── audio_repository.py
-│   ├── metadata_repository.py
-│   ├── database_adapter.py
-│   └── cloud_storage_adapter.py
+│   └── frameworks/
+│   └── persistence/
 ├── core/
-│   ├── __init__.py
-│   ├── audio_processor.py
-│   └── database_service.py
+│   └── domain/
+│   └── application/
+│   └── repositories/
 ├── ports/
-│   ├── __init__.py
-│   ├── audio_repository_port.py
-│   ├── metadata_repository_port.py
-│   ├── database_port.py
-│   └── cloud_storage_port.py
+│   └── outputs/
+│   └── inputs/
 ├── tests/
-│   ├── __init__.py
-│   ├── test_audio_processor.py
-│   ├── test_database_service.py
-│   ├── test_adapters.py
-│   └── fixtures/
 ├── scripts/
-│   └── process_audio.py
 ├── configs/
-│   ├── __init__.py
-│   ├── config.yaml
-│   ├── logger.py
-│   └── logging.yaml
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
